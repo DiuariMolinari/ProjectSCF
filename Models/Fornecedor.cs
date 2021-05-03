@@ -24,7 +24,7 @@ namespace SCF.Models
         [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime CadastradoEm { get; set; }
 
         public ICollection<Contato> Contatos { get; set; }
