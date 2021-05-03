@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SCF.Models.Empresa>
+
+<h2>Empresas</h2>
+
+<p>
+    <a asp-action="CriarEmpresa" class="btn btn-info">Cadastrar Empresa</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeFantasia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cnpj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeFantasia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cnpj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Nome)
+            </td>
+            <td>
+                <a asp-action="AtualizarEmpresa" asp-route-id="@item.EmpresaId" class="btn btn-primary">Editar</a> |
+                <a asp-action="ExcluirEmpresa" asp-route-id="@item.EmpresaId" class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,13 @@
+﻿.btnVoltar {
+    text-align: center;
+    padding-top: 30px
+}
+
+.errorMessage {
+    color: red;
+    text-align: center
+}
+
+.ops {
+    text-align: center
+}

@@ -1,0 +1,78 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20210408190233_SPDF.cs" />
+    <Compile Remove="Migrations\20210408190233_SPF.Designer.cs" />
+    <Compile Remove="Migrations\20210408223713_initial.cs" />
+    <Compile Remove="Migrations\20210408223713_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210408223916_folhaPagamento.cs" />
+    <Compile Remove="Migrations\20210408223916_folhaPagamento.Designer.cs" />
+    <Compile Remove="Migrations\20210408224248_initial.cs" />
+    <Compile Remove="Migrations\20210408224248_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210408224416_initial.cs" />
+    <Compile Remove="Migrations\20210408224416_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210408224800_folhapagamnto.cs" />
+    <Compile Remove="Migrations\20210408224800_folhapagamnto.Designer.cs" />
+    <Compile Remove="Migrations\20210408225324_initial.cs" />
+    <Compile Remove="Migrations\20210408225324_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210408232017_initial.cs" />
+    <Compile Remove="Migrations\20210408232017_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210414223527_initial.cs" />
+    <Compile Remove="Migrations\20210414223527_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210414230203_inital.cs" />
+    <Compile Remove="Migrations\20210414230203_inital.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Contato\AtualizarContato.cshtml" />
+    <None Include="Views\Contato\CriarContato.cshtml" />
+    <None Include="Views\Contato\ExcluirContato.cshtml" />
+    <None Include="Views\Contato\Index.cshtml" />
+    <None Include="Views\Empresa\AtualizarEmpresa.cshtml" />
+    <None Include="Views\Empresa\CriarEmpresa.cshtml" />
+    <None Include="Views\Empresa\ExcluirEmpresa.cshtml" />
+    <None Include="Views\Empresa\Index.cshtml" />
+    <None Include="Views\Estado\AtualizarEstado.cshtml" />
+    <None Include="Views\Estado\CriarEstado.cshtml" />
+    <None Include="Views\Estado\ExcluirEstado.cshtml" />
+    <None Include="Views\Estado\Index.cshtml" />
+    <None Include="Views\Fornecedor\AtualizarFornecedor.cshtml" />
+    <None Include="Views\Fornecedor\CriarFornecedor.cshtml" />
+    <None Include="Views\Fornecedor\ExcluirFornecedor.cshtml" />
+    <None Include="Views\Fornecedor\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Pais\AtualizarPais.cshtml" />
+    <None Include="Views\Pais\CriarPais.cshtml" />
+    <None Include="Views\Pais\ExcluirPais.cshtml" />
+    <None Include="Views\Pais\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+  </ItemGroup>
+
+</Project>

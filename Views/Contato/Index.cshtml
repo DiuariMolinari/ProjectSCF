@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SCF.Models.Contato>
+
+<h2>Contatos</h2>
+
+<p>
+    <a asp-action="CriarContato" class="btn btn-info">Cadastrar Contato</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fornecedor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fornecedor.CpfCnpj)
+            </td>
+            <td>
+                <a asp-action="AtualizarContato" asp-route-id="@item.ContatoId" class="btn btn-primary">Editar</a> |
+                <a asp-action="ExcluirContato" asp-route-id="@item.ContatoId" class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

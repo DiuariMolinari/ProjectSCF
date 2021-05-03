@@ -1,0 +1,27 @@
+﻿@model SCF.Models.Contato
+
+<h2>Cadastrar Contato</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CriarContato">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fornecedor</label>
+                @Html.DropDownListFor(m => m.FornecedorId, ViewBag.Fornecedores as SelectList, null, new { @class = "form-control" })
+                <span asp-validation-for="FornecedorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-info" /> |
+                <a asp-action="Index" class="btn btn-default">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@model SCF.Models.Pais
+
+@{
+    ViewData["Title"] = "ExcluirPais";
+}
+
+<h2>Excluir País</h2>
+
+<h3>Tem certeza que deseja fazer isso?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Sigla)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Sigla)
+        </dd>
+    </dl>
+    
+    <form asp-action="ExcluirPais">
+        <input type="hidden" asp-for="PaisId" />
+        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-default">Voltar</a>
+    </form>
+</div>

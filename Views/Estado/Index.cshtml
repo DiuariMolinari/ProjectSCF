@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SCF.Models.Estado>
+
+<h2>Estados</h2>
+
+<p>
+    <a asp-action="CriarEstado" class="btn btn-info">Cadastrar Estado</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sigla)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pais)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sigla)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pais.Nome)
+            </td>
+            <td>
+                <a asp-action="AtualizarEstado" asp-route-id="@item.EstadoId" class="btn btn-primary">Editar</a> |
+                <a asp-action="ExcluirEstado" asp-route-id="@item.EstadoId" class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
