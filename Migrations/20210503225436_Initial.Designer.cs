@@ -10,8 +10,8 @@ using SCF.Models;
 namespace SCF.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210502224907_initial")]
-    partial class initial
+    [Migration("20210503225436_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,8 @@ namespace SCF.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CadastradoEm");
 
                     b.Property<int>("EmpresaId");
 

@@ -80,7 +80,7 @@ namespace SCF.Controllers
         {
             if (id != null)
             {
-                Contato Contato = _context.Contatos.Find(id);
+                Contato Contato = _context.Contatos.Include(x => x.Fornecedor).First(x => x.ContatoId == id);
                 return View(Contato);
             }
             else

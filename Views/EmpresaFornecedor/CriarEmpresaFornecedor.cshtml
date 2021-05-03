@@ -1,0 +1,42 @@
+﻿@model SCF.Models.EmpresaFornecedor
+
+<h2>Vincular Fornecedor</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CriarEmpresaFornecedor">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Empresa</label>
+                @Html.DropDownListFor(m => m.EmpresaId, ViewBag.Empresas as SelectList, null, new { @class = "form-control", @disabled = "disabled" })
+                @Html.HiddenFor(m => m.EmpresaId, new { id = "DropDownValue" })
+                <span asp-validation-for="EmpresaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fornecedor</label>
+                @Html.DropDownListFor(m => m.FornecedorId, ViewBag.Fornecedores as SelectList, null, new { @class = "form-control"})
+                <span asp-validation-for="FornecedorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-info" /> |
+                <a asp-action="Index" asp-controller="Empresa" class="btn btn-default">Voltar</a>
+            </div>
+            <div class="form-group">
+                <input asp-for="CadastradoEm" class="form-control" id="CadastradoEm" type="hidden" value="@DateTime.Now"/>
+                <span asp-validation-for="CadastradoEm" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+</script>
+<script type="text/javascript">
+    
+    $("#EmpresaId").val(sessionStorage.getItem('Empresa'));
+    $("#DropDownValue").val(sessionStorage.getItem('Empresa'))
+</script>

@@ -9,19 +9,19 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
+                <input asp-for="Nome" class="form-control" required/>
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label class="control-label">CPF/CNPJ</label>
-                <input asp-for="CpfCnpj" type="text" class="form-control" id="CpfCnpj"/>
+                <input asp-for="CpfCnpj" type="text" class="form-control" id="CpfCnpj" required/>
                 <span asp-validation-for="CpfCnpj" class="text-danger"></span>
             </div>
 
             <div class="form-group" id="gpRg">
                 <label asp-for="Rg" class="control-label" ></label>
-                <input asp-for="Rg" class="form-control" id="Rg" maxlength="15" pattern="([A-Za-z0-9]{15})"/>
+                <input asp-for="Rg" class="form-control" id="Rg" maxlength="15" pattern="([A-Za-z0-9]{0,15})"/>
                 <span asp-validation-for="Rg" class="text-danger"></span>
             </div>
             <div class="form-group" id="gpDataNascimento">
@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group">
-                <input asp-for="CadastradoEm" class="form-control" id="CadastradoEm" type="hidden"/>
+                <input asp-for="CadastradoEm" class="form-control" id="CadastradoEm" type="hidden" value="@DateTime.Now"/>
                 <span asp-validation-for="CadastradoEm" class="text-danger"></span>
             </div>
             <div class="form-group">

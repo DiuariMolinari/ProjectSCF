@@ -20,6 +20,7 @@ namespace SCF.Models
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
+        public DbSet<EmpresaFornecedor> EmpresaFornecedor { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

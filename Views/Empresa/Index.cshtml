@@ -9,7 +9,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomeFantasia)
+                Nome Fantasia
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cnpj)
@@ -34,7 +34,8 @@
             </td>
             <td>
                 <a asp-action="AtualizarEmpresa" asp-route-id="@item.EmpresaId" class="btn btn-primary">Editar</a> |
-                <a asp-action="ExcluirEmpresa" asp-route-id="@item.EmpresaId" class="btn btn-danger">Excluir</a>
+                <a asp-action="ExcluirEmpresa" asp-route-id="@item.EmpresaId" class="btn btn-danger">Excluir</a> |
+                <a asp-action="Fornecedores" asp-route-id="@item.EmpresaId" class="btn btn-warning">Fornecedores</a>
             </td>
         </tr>
 }

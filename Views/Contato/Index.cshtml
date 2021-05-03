@@ -24,7 +24,7 @@
                 @Html.DisplayFor(modelItem => item.Telefone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fornecedor.CpfCnpj)
+                @Html.DisplayFor(modelItem => item.Fornecedor.Nome)
             </td>
             <td>
                 <a asp-action="AtualizarContato" asp-route-id="@item.ContatoId" class="btn btn-primary">Editar</a> |

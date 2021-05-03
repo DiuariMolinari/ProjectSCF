@@ -8,13 +8,13 @@
         <form asp-action="CriarEmpresa">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NomeFantasia" class="control-label"></label>
-                <input asp-for="NomeFantasia" class="form-control" />
+                <label class="control-label">Nome Fantasia</label>
+                <input asp-for="NomeFantasia" class="form-control" required/>
                 <span asp-validation-for="NomeFantasia" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Cnpj" class="control-label"></label>
-                <input asp-for="Cnpj" class="form-control" />
+                <input asp-for="Cnpj" class="form-control" id="Cnpj" required/>
                 <span asp-validation-for="Cnpj" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -23,9 +23,17 @@
                 <span asp-validation-for="EstadoId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Salvar" class="btn btn-info" /> |
+                <input type="submit" value="Salvar" class="btn btn-info" id="btnSalvar" /> |
                 <a asp-action="Index" class="btn btn-default">Voltar</a>
             </div>
         </form>
     </div>
 </div>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+</script>
+
+<script type="text/javascript" src="~/js/Empresa/CriarEmpresa.js"></script>

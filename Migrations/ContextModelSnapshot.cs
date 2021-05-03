@@ -67,6 +67,8 @@ namespace SCF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CadastradoEm");
+
                     b.Property<int>("EmpresaId");
 
                     b.Property<int>("FornecedorId");

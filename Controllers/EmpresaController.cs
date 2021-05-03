@@ -49,8 +49,8 @@ namespace SCF.Controllers
             if (id != null)
             {
                 ViewBag.Estados = new SelectList(_context.Estados, "EstadoId", "Nome");
-                Empresa Empresa = _context.Empresas.Find(id);
-                return View(Empresa);
+                var empresa = _context.Empresas.Find(id);
+                return View(empresa);
             }
             else
                 return NotFound();
@@ -80,8 +80,8 @@ namespace SCF.Controllers
         {
             if (id != null)
             {
-                Empresa Empresa = _context.Empresas.Find(id);
-                return View(Empresa);
+                Empresa empresa = _context.Empresas.Include(x => x.Estado).First(x => x.EmpresaId == id);
+                return View(empresa);
             }
             else
                 return NotFound();
@@ -95,6 +95,17 @@ namespace SCF.Controllers
                 _context.Remove(Empresa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            else
+                return NotFound();
+        }
+
+        [HttpGet]
+        public IActionResult Fornecedores(int? id)
+        {
+            if (id != null)
+            {
+                return RedirectToAction("Index", "EmpresaFornecedor", new { idEmpresa = id });
             }
             else
                 return NotFound();

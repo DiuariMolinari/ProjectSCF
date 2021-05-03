@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SCF.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,7 +108,8 @@ namespace SCF.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     EmpresaId = table.Column<int>(nullable: false),
-                    FornecedorId = table.Column<int>(nullable: false)
+                    FornecedorId = table.Column<int>(nullable: false),
+                    CadastradoEm = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
