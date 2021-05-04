@@ -24,6 +24,11 @@ namespace SCF.Models.Data
                 {
                     Nome = "Argentina",
                     Sigla = "AR"
+                },
+                new Pais
+                {
+                    Nome = "Chile",
+                    Sigla = "CL"
                 }
             };
             context.AddRange(paises);
@@ -74,6 +79,87 @@ namespace SCF.Models.Data
                 }
             };
             context.AddRange(empresas);
+
+            var fornecedores = new Fornecedor[]
+            {
+                new Fornecedor
+                {
+                    Nome = "Fornecedor 1",
+                    CpfCnpj = "87281763000136",
+                    CadastradoEm = DateTime.Now
+                },
+                new Fornecedor
+                {
+                    Nome = "Fornecedor 2",
+                    CpfCnpj = "09875463094",
+                    Rg = "218947781",
+                    DataNascimento = new DateTime(2000, 1, 1),
+                    CadastradoEm = DateTime.Now
+                },
+                new Fornecedor
+                {
+                    Nome = "Fornecedor 3",
+                    CpfCnpj = "38217917051",
+                    Rg = "175347645",
+                    DataNascimento = new DateTime(2010, 12, 15),
+                    CadastradoEm = DateTime.Now
+                },
+            };
+            context.AddRange(fornecedores);
+
+            var contatos = new Contato[]
+            {
+                new Contato
+                {
+                    Telefone = "47999999999",
+                    Fornecedor = fornecedores[0],
+                },
+                new Contato
+                {
+                    Telefone = "47888888888",
+                    Fornecedor = fornecedores[0],
+                },
+                new Contato
+                {
+                    Telefone = "47777777777",
+                    Fornecedor = fornecedores[1],
+                },
+                new Contato
+                {
+                    Telefone = "47666666666",
+                    Fornecedor = fornecedores[2],
+                },
+            };
+            context.AddRange(contatos);
+
+            var empresasFornecedores = new EmpresaFornecedor[]
+            {
+                new EmpresaFornecedor
+                {
+                    Empresa = empresas[0],
+                    Fornecedor = fornecedores[0],
+                    CadastradoEm = DateTime.Now,
+                },
+                new EmpresaFornecedor
+                {
+                    Empresa = empresas[0],
+                    Fornecedor = fornecedores[1],
+                    CadastradoEm = DateTime.Now,
+                },
+                new EmpresaFornecedor
+                {
+                    Empresa = empresas[1],
+                    Fornecedor = fornecedores[1],
+                    CadastradoEm = DateTime.Now,
+                },
+                new EmpresaFornecedor
+                {
+                    Empresa = empresas[2],
+                    Fornecedor = fornecedores[2],
+                    CadastradoEm = DateTime.Now,
+                },
+            };
+            context.AddRange(empresasFornecedores);
 
             context.SaveChanges();
         }
