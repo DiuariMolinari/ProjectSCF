@@ -10,7 +10,7 @@ using SCF.Models;
 namespace SCF.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210504180311_Initial")]
+    [Migration("20210504203701_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

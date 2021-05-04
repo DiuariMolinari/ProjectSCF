@@ -44,7 +44,7 @@ namespace SCF.Controllers
                 }
                 return View(Empresa);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.ErrorMessage = "Não foi possível criar nova empresa! \r\n Por favor entre em contato com o suporte!";
                 return View("Error");
