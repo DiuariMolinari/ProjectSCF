@@ -34,13 +34,21 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarContato(Contato Contato)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(Contato);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(Contato);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(Contato);
             }
-            return View(Contato);
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível criar novo contato! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -59,20 +67,29 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> AtualizarContato(int? id, Contato Contato)
         {
-            if (id != null)
+            try
             {
-                if (ModelState.IsValid)
+                if (id != null)
                 {
-                    _context.Update(Contato);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    if (ModelState.IsValid)
+                    {
+                        _context.Update(Contato);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                        return View(Contato);
                 }
+
                 else
-                    return View(Contato);
+                    return NotFound();
             }
 
-            else
-                return NotFound();
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível atualizar contato! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -90,14 +107,23 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirContato(int? id, Contato Contato)
         {
-            if (id != null)
+            try
             {
-                _context.Remove(Contato);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (id != null)
+                {
+                    _context.Remove(Contato);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return NotFound();
             }
-            else
-                return NotFound();
+
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível excluir contato! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
     }
 }

@@ -34,13 +34,22 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarEstado(Estado Estado)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(Estado);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(Estado);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(Estado);
             }
-            return View(Estado);
+           
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível criar novo estado! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -59,20 +68,28 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> AtualizarEstado(int? id, Estado Estado)
         {
-            if (id != null)
+            try
             {
-                if (ModelState.IsValid)
+                if (id != null)
                 {
-                    _context.Update(Estado);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    if (ModelState.IsValid)
+                    {
+                        _context.Update(Estado);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                        return View(Estado);
                 }
-                else
-                    return View(Estado);
-            }
 
-            else
-                return NotFound();
+                else
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível atualizar estado! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -90,14 +107,22 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirEstado(int? id, Estado Estado)
         {
-            if (id != null)
+            try
             {
-                _context.Remove(Estado);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (id != null)
+                {
+                    _context.Remove(Estado);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return NotFound();
             }
-            else
-                return NotFound();
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível excluir estado! \r\n Existem registros vinculados a ele!";
+                return View("Error");
+            }
         }
     }
 }

@@ -31,13 +31,21 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarPais(Pais Pais)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(Pais);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(Pais);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(Pais);
             }
-            return View(Pais);
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível criar novo país! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -55,20 +63,28 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> AtualizarPais(int? id, Pais Pais)
         {
-            if (id != null)
+            try
             {
-                if (ModelState.IsValid)
+                if (id != null)
                 {
-                    _context.Update(Pais);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    if (ModelState.IsValid)
+                    {
+                        _context.Update(Pais);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                        return View(Pais);
                 }
-                else
-                    return View(Pais);
-            }
 
-            else
-                return NotFound();
+                else
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível atualizar país! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -86,14 +102,22 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirPais(int? id, Pais Pais)
         {
-            if (id != null)
+            try
             {
-                _context.Remove(Pais);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (id != null)
+                {
+                    _context.Remove(Pais);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return NotFound();
             }
-            else
-                return NotFound();
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível Excluir país! \r\n Existem registros vinculados a ele!";
+                return View("Error");
+            }
         }
     }
 }

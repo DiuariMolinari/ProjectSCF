@@ -10,7 +10,7 @@ using SCF.Models;
 namespace SCF.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210503225436_Initial")]
+    [Migration("20210504180311_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,7 +157,7 @@ namespace SCF.Migrations
                     b.HasOne("SCF.Models.Fornecedor", "Fornecedor")
                         .WithMany("Contatos")
                         .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SCF.Models.Empresa", b =>
@@ -165,7 +165,7 @@ namespace SCF.Migrations
                     b.HasOne("SCF.Models.Estado", "Estado")
                         .WithMany()
                         .HasForeignKey("EstadoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SCF.Models.EmpresaFornecedor", b =>
@@ -178,15 +178,15 @@ namespace SCF.Migrations
                     b.HasOne("SCF.Models.Fornecedor", "Fornecedor")
                         .WithMany("EmpresasFornecedores")
                         .HasForeignKey("FornecedorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("SCF.Models.Estado", b =>
                 {
                     b.HasOne("SCF.Models.Pais", "Pais")
-                        .WithMany()
+                        .WithMany("Estados")
                         .HasForeignKey("PaisId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

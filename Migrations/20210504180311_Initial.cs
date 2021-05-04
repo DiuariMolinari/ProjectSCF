@@ -56,7 +56,7 @@ namespace SCF.Migrations
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedores",
                         principalColumn: "FornecedorId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,7 +77,7 @@ namespace SCF.Migrations
                         column: x => x.PaisId,
                         principalTable: "Paises",
                         principalColumn: "PaisId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +98,7 @@ namespace SCF.Migrations
                         column: x => x.EstadoId,
                         principalTable: "Estados",
                         principalColumn: "EstadoId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,7 +125,7 @@ namespace SCF.Migrations
                         column: x => x.FornecedorId,
                         principalTable: "Fornecedores",
                         principalColumn: "FornecedorId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

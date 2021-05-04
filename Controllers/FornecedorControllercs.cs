@@ -58,6 +58,7 @@ namespace SCF.Controllers
                 fornecedores = _context.Fornecedores.Where(x => x.DataNascimento >= minData &&
                                                                 x.DataNascimento <= maxData).ToList();
             }
+
             else
              fornecedores = _context.Fornecedores.ToList();
 
@@ -82,13 +83,21 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarFornecedor(Fornecedor fornecedor)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(fornecedor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(fornecedor);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(fornecedor);
             }
-            return View(fornecedor);
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível criar novo fornecedor! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -106,20 +115,28 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> AtualizarFornecedor(int? id, Fornecedor fornecedor)
         {
-            if (id != null)
+            try
             {
-                if (ModelState.IsValid)
+                if (id != null)
                 {
-                    _context.Update(fornecedor);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    if (ModelState.IsValid)
+                    {
+                        _context.Update(fornecedor);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                        return View(fornecedor);
                 }
-                else
-                    return View(fornecedor);
-            }
 
-            else
-                return NotFound();
+                else
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível atualizar fornecedor! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -137,14 +154,22 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirFornecedor(int? id, Fornecedor Fornecedor)
         {
-            if (id != null)
+            try
             {
-                _context.Remove(Fornecedor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (id != null)
+                {
+                    _context.Remove(Fornecedor);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return NotFound();
             }
-            else
-                return NotFound();
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível excluir fornecedor! \r\n Existem registros vinculados a ele!";
+                return View("Error");
+            }
         }
     }
 }

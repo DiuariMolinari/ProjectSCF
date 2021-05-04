@@ -13,7 +13,7 @@ namespace SCF.DataAccess.EntityConfig
         {
             builder.Property(e => e.Telefone).HasColumnType("varchar(20)").IsRequired();
             builder.HasOne(c => c.Fornecedor).WithMany(c => c.Contatos)
-                        .HasForeignKey(c => c.FornecedorId).HasPrincipalKey(c => c.FornecedorId).OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey(c => c.FornecedorId).HasPrincipalKey(c => c.FornecedorId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

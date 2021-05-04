@@ -12,8 +12,8 @@ namespace SCF.DataAccess.EntityConfig
         public void Configure(EntityTypeBuilder<EmpresaFornecedor> builder)
         {
             builder.HasKey(ef => ef.Id);
-            builder.HasOne(ef => ef.Empresa).WithMany(ef => ef.EmpresasFornecedores).HasForeignKey(ef => ef.EmpresaId).OnDelete(DeleteBehavior.Restrict); ;
-            builder.HasOne(ef => ef.Fornecedor).WithMany(ef => ef.EmpresasFornecedores).HasForeignKey(ef => ef.FornecedorId);
+            builder.HasOne(ef => ef.Empresa).WithMany(ef => ef.EmpresasFornecedores).HasForeignKey(ef => ef.EmpresaId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(ef => ef.Fornecedor).WithMany(ef => ef.EmpresasFornecedores).HasForeignKey(ef => ef.FornecedorId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

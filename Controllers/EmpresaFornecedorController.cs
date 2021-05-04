@@ -47,13 +47,36 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarEmpresaFornecedor(EmpresaFornecedor EmpresaFornecedor)
         {
+            try
+            {
+                Empresa empresa = _context.Empresas.Include(x => x.Estado).First(x => x.EmpresaId == EmpresaFornecedor.EmpresaId);
+                Fornecedor fornecedor = _context.Fornecedores.Find(EmpresaFornecedor.FornecedorId);
+                ValidateFonecedor(empresa, fornecedor);
+            }
+            catch (Exception e)
+            {
+                ViewBag.ErrorMessage = e.Message;
+                return View("Error");
+            }
+           
             if (ModelState.IsValid)
             {
                 _context.Add(EmpresaFornecedor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", new { idEmpresa = EmpresaFornecedor.EmpresaId });
             }
-            return View(EmpresaFornecedor);
+            return View();
+        }
+
+        private void ValidateFonecedor(Empresa empresa, Fornecedor fornecedor)
+        {
+            if (empresa is null  || fornecedor is null)
+                throw new Exception("Não foi possível ler o dados da empresa ou fornecedor!");
+
+            bool isCpf = fornecedor.CpfCnpj.Length <= 11;
+            bool isMenorIdade = (DateTime.Now.Year - fornecedor.DataNascimento.Year) < 18;
+            if (empresa.Estado.Nome.Equals("Paraná") && isCpf && isMenorIdade)
+                throw new Exception("Não é possível vincular um fornecedor pessoa física menor de idade para esta empresa!");
         }
 
         [HttpGet]
@@ -73,12 +96,20 @@ namespace SCF.Controllers
         {
             if (id != null)
             {
-                var empresaFornecedor = _context.EmpresaFornecedor.Include(x => x.Empresa).First(x => x.Id == id);
-                _context.Entry(empresaFornecedor).State = EntityState.Detached;
+                try
+                {
+                    var empresaFornecedor = _context.EmpresaFornecedor.Include(x => x.Empresa).First(x => x.Id == id);
+                    _context.Entry(empresaFornecedor).State = EntityState.Detached;
 
-                _context.Remove(EmpresaFornecedor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", new { idEmpresa = empresaFornecedor.Empresa.EmpresaId });
+                    _context.Remove(EmpresaFornecedor);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", new { idEmpresa = empresaFornecedor.Empresa.EmpresaId });
+                }
+                catch (Exception)
+                {
+                    ViewBag.ErrorMessage = "Falha ao desvincular fornecedor! Por favor entre em contato com o suporte!";
+                    return View("Error");
+                }
             }
             else
                 return NotFound();

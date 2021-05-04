@@ -14,7 +14,7 @@ namespace SCF.DataAccess.EntityConfig
             builder.Property(e => e.Nome).HasColumnType("varchar(200)").IsRequired();
             builder.Property(e => e.CpfCnpj).HasColumnType("varchar(15)").IsRequired();
             builder.Property(e => e.Rg).HasColumnType("varchar(15)");
-            builder.HasMany(f => f.Contatos).WithOne(f => f.Fornecedor).HasForeignKey(f => f.FornecedorId).HasPrincipalKey(f => f.FornecedorId).OnDelete(DeleteBehavior.Restrict); ;
+            builder.HasMany(f => f.Contatos).WithOne(f => f.Fornecedor).HasForeignKey(f => f.FornecedorId).HasPrincipalKey(f => f.FornecedorId).OnDelete(DeleteBehavior.Cascade); ;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace SCF.DataAccess.EntityConfig
     {
         public void Configure(EntityTypeBuilder<Empresa> builder)
         {
+            builder.HasOne(e => e.Estado).WithMany().HasForeignKey(c => c.EstadoId).HasPrincipalKey(c => c.EstadoId).OnDelete(DeleteBehavior.Restrict);
             builder.Property(e => e.NomeFantasia).HasColumnType("varchar(200)").IsRequired();
             builder.Property(e => e.Cnpj).HasColumnType("varchar(15)").IsRequired();
             builder.HasKey(e => e.EmpresaId);

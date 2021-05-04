@@ -34,13 +34,21 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> CriarEmpresa(Empresa Empresa)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(Empresa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(Empresa);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(Empresa);
             }
-            return View(Empresa);
+            catch (Exception e)
+            {
+                ViewBag.ErrorMessage = "Não foi possível criar nova empresa! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -59,20 +67,28 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> AtualizarEmpresa(int? id, Empresa Empresa)
         {
-            if (id != null)
+            try
             {
-                if (ModelState.IsValid)
+                if (id != null)
                 {
-                    _context.Update(Empresa);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    if (ModelState.IsValid)
+                    {
+                        _context.Update(Empresa);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                        return View(Empresa);
                 }
-                else
-                    return View(Empresa);
-            }
 
-            else
-                return NotFound();
+                else
+                    return NotFound();
+            }
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível atualizar empresa! \r\n Por favor entre em contato com o suporte!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
@@ -90,14 +106,22 @@ namespace SCF.Controllers
         [HttpPost]
         public async Task<IActionResult> ExcluirEmpresa(int? id, Empresa Empresa)
         {
-            if (id != null)
+            try
             {
-                _context.Remove(Empresa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (id != null)
+                {
+                    _context.Remove(Empresa);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return NotFound();
             }
-            else
-                return NotFound();
+             catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Não foi possível excluir empresa! \r\n Existem registros vinculados a ela!";
+                return View("Error");
+            }
         }
 
         [HttpGet]
