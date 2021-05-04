@@ -58,7 +58,7 @@ namespace SCF
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pais}/{action=Index}/{id?}");
+                    template: "{controller=Empresa}/{action=Index}/{id?}");
             });
         }
     }
