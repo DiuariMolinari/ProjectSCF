@@ -17,9 +17,59 @@ namespace SCF.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string Nome, string CpfCnpj, DateTime minData, DateTime maxData)
         {
-            var fornecedores = _context.Fornecedores.ToList();
+            List<Fornecedor> fornecedores;
+            if (!string.IsNullOrEmpty(Nome) && !string.IsNullOrEmpty(CpfCnpj) && minData != DateTime.MinValue && maxData != DateTime.MinValue)
+            {
+                fornecedores = _context.Fornecedores.Where(x => x.Nome.Contains(Nome) &&
+                                                            x.CpfCnpj.Contains(CpfCnpj) && 
+                                                            x.DataNascimento >= minData && 
+                                                            x.DataNascimento <= maxData).ToList();
+            }
+            else if (!string.IsNullOrEmpty(CpfCnpj) && minData != DateTime.MinValue && maxData != DateTime.MinValue)
+            {
+                fornecedores = _context.Fornecedores.Where(x => x.CpfCnpj.Contains(CpfCnpj) &&
+                                                                x.DataNascimento >= minData &&
+                                                                x.DataNascimento <= maxData).ToList();
+            }
+            else if (!string.IsNullOrEmpty(Nome) && minData != DateTime.MinValue && maxData != DateTime.MinValue)
+            {
+                fornecedores = _context.Fornecedores.Where(x => x.Nome.Contains(Nome) &&
+                                                                x.DataNascimento >= minData &&
+                                                                x.DataNascimento <= maxData).ToList();
+            }
+            else if (!string.IsNullOrEmpty(Nome) && !string.IsNullOrEmpty(CpfCnpj))
+            {
+                fornecedores = _context.Fornecedores.Where(x => x.Nome.Contains(Nome) && x.CpfCnpj.Contains(CpfCnpj)).ToList();
+            }
+            else if (!string.IsNullOrEmpty(CpfCnpj))
+            {
+                fornecedores = _context.Fornecedores.Where(x => x.CpfCnpj.Contains(CpfCnpj)).ToList();
+            }
+
+            else if (!string.IsNullOrEmpty(Nome))
+            {
+                fornecedores = _context.Fornecedores.Where(x => x.Nome.Contains(Nome)).ToList();
+            }
+
+            else if (minData != DateTime.MinValue && maxData != DateTime.MinValue)
+            {
+                fornecedores = _context.Fornecedores.Where(x => x.DataNascimento >= minData &&
+                                                                x.DataNascimento <= maxData).ToList();
+            }
+            else
+             fornecedores = _context.Fornecedores.ToList();
+
+            if (minData != DateTime.MinValue)
+                ViewBag.minData = minData.ToString("yyyy-MM-dd");
+
+            if (maxData != DateTime.MinValue)
+                ViewBag.maxData = maxData.ToString("yyyy-MM-dd");
+
+            ViewBag.Nome = Nome;
+            ViewBag.CpfCnpj = CpfCnpj;
+
             return View(fornecedores);
         }
 

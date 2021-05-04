@@ -1,11 +1,38 @@
 ﻿@model IEnumerable<SCF.Models.Fornecedor>
 
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/Fornecedor/Index.css" rel="stylesheet" />
+</head>
+
 <h2>Fornecedores</h2>
 
 <p>
     <a asp-action="CriarFornecedor" class="btn btn-info">Cadastrar Fornecedor</a>
 </p>
 <table class="table">
+    <form asp-action="Index" method="post">
+        <div>
+            <label class="control-label inputFilter">Nome</label>
+            <input class="form-control inputFilter" type="text" name="Nome" value="@ViewBag.Nome" id="Nome">
+
+            <label class="control-label inputFilter">CpfCnpj</label>
+            <input class="form-control inputFilter" type="text" name="CpfCnpj" value="@ViewBag.CpfCnpj" id="CpfCnpj">
+        </div>
+        <div class="fieldsDown">
+            <label class="control-label inputFilter">Data de nascimento (Range)</label>
+            <input class="form-control inputFilter" type="date" data-val="true" name="minData" value="@ViewBag.minData" id="minData">
+            <input class="form-control inputFilter" type="date" data-val="true" name="maxData" value="@ViewBag.maxData" id="maxData">
+
+            <button type="submit" class="btn btn-info btnFilter" id="btnFilter">
+                <i class="fa fa-search"></i>
+            </button>
+            <button type="button" id="btnClear" class="btn btn-info btnFilter">
+                <i class="fa fa-close"></i>
+            </button>
+        </div>
+</form>
+
     <thead>
         <tr>
             <th>
@@ -27,28 +54,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CpfCnpj)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CadastradoEm)
-            </td>
-            <td>
-                <a asp-action="AtualizarFornecedor" asp-route-id="@item.FornecedorId" class="btn btn-primary">Editar</a> |
-                <a asp-action="ExcluirFornecedor" asp-route-id="@item.FornecedorId" class="btn btn-danger">Excluir</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CpfCnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CadastradoEm)
+                </td>
+                <td>
+                    <a asp-action="AtualizarFornecedor" asp-route-id="@item.FornecedorId" class="btn btn-primary">Editar</a> |
+                    <a asp-action="ExcluirFornecedor" asp-route-id="@item.FornecedorId" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
+</script>
+<script type="text/javascript" src="~/js/Fornecedor/Index.js"></script>

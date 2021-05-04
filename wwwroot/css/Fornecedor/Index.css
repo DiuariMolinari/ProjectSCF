@@ -1,0 +1,14 @@
+﻿.inputFilter {
+    width: 20%;
+    display: inline;
+    margin-left: 5px;
+}
+.btnFilter {
+    display: inline;
+    margin-left: 5px;
+}
+
+.fieldsDown {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
